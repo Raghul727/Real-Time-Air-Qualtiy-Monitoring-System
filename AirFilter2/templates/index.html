@@ -1,0 +1,128 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="5">
+    <title>Air Quality Monitor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Air Quality Monitor</h1>
+        
+        <div class="cards-container">
+            <!-- Temperature Card -->
+            <div class="card temperature">
+                {% if data.temperature.warning %}
+                <div class="warning-indicator visible">
+                    ⚠️
+                </div>
+                {% endif %}
+                <div class="card-header">
+                    <h2>Temperature</h2>
+                </div>
+                <div class="card-content">
+                    <div class="value-container">
+                        <span>{{ data.temperature.value }}</span>
+                        <span class="unit">°C</span>
+                        <div class="threshold">
+                            [{{ data.thresholds.temperature.min }}-{{ data.thresholds.temperature.max }}°C]
+                        </div>
+                    </div>
+                    <div class="icon-container">
+                        <div class="thermometer">
+                            <div class="thermometer-fill"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Humidity Card -->
+            <div class="card humidity">
+                {% if data.humidity.warning %}
+                <div class="warning-indicator visible">
+                    ⚠️
+                </div>
+                {% endif %}
+                <div class="card-header">
+                    <h2>Humidity</h2>
+                </div>
+                <div class="card-content">
+                    <div class="value-container">
+                        <span>{{ data.humidity.value }}</span>
+                        <span class="unit">%</span>
+                        <div class="threshold">
+                            [{{ data.thresholds.humidity.min }}-{{ data.thresholds.humidity.max }}%]
+                        </div>
+                    </div>
+                    <div class="icon-container">
+                        <div class="droplet">
+                            <div class="droplet-animate"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MQ135 Card -->
+            <div class="card MQ135">
+                {% if data.MQ135.warning %}
+                <div class="warning-indicator visible">
+                    ⚠️
+                </div>
+                {% endif %}
+                <div class="card-header">
+                    <h2>MQ135</h2>
+                </div>
+                <div class="card-content">
+                    <div class="value-container">
+                        <span>{{ data.MQ135.value }}</span>
+                        <span class="unit"></span>
+                        <div class="threshold">
+                            [{{ data.thresholds.MQ135.min }}-{{ data.thresholds.MQ135.max }}]
+                        </div>
+                    </div>
+                    <div class="icon-container">
+                        <div class="fan">
+                            <div class="blade"></div>
+                            <div class="blade"></div>
+                            <div class="blade"></div>
+                            <div class="blade"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Historical Data -->
+        <div class="card chart-card">
+            <div class="card-header">
+                <h2>Historical Data</h2>
+            </div>
+            <div class="card-content">
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Temperature</th>
+                            <th>Humidity</th>
+                            <th>MQ135</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for record in data.history %}
+                        <tr>
+                            <td>{{ record.timestamp }}</td>
+                            <td>{{ record.value1 }}°C</td>
+                            <td>{{ record.value2 }}%</td>
+                            <td>{{ record.value3 }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,199 @@
+/* static/styles.css */
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: system-ui, -apple-system, sans-serif;
+    background-color: #0f172a;
+    color: white;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+}
+
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.card {
+    background-color: #1e293b;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-header h2 {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.card-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.value-container {
+    font-size: 2rem;
+    font-weight: bold;
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+}
+
+.unit {
+    font-size: 1.25rem;
+}
+
+.threshold {
+    font-size: 0.875rem;
+    opacity: 0.5;
+}
+
+.icon-container {
+    position: relative;
+    width: 48px;
+    height: 48px;
+}
+
+/* Warning Indicator */
+.warning-indicator {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: 1.5rem;
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.3s;
+}
+
+.warning-indicator.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Temperature Styles */
+.temperature h2, .temperature .value-container {
+    color: #a855f7;
+}
+
+.thermometer {
+    position: relative;
+    width: 16px;
+    height: 48px;
+    background-color: rgba(168, 85, 247, 0.2);
+    border-radius: 8px 8px 0 0;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.thermometer-fill {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, #9333ea, #a855f7);
+    animation: thermometer-rise 2s ease-in-out infinite;
+}
+
+@keyframes thermometer-rise {
+    0%, 100% { height: 20%; }
+    50% { height: 80%; }
+}
+
+/* Humidity Styles */
+.humidity h2, .humidity .value-container {
+    color: #10b981;
+}
+
+.droplet {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.droplet-animate {
+    width: 20px;
+    height: 20px;
+    background-color: #10b981;
+    border-radius: 0 50% 50% 50%;
+    transform: rotate(45deg);
+    animation: droplet-fall 2s ease-in-out infinite;
+}
+
+@keyframes droplet-fall {
+    0% { transform: rotate(45deg) translateY(-20px); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: rotate(45deg) translateY(20px); opacity: 0; }
+}
+
+/* MQ135 Styles */
+.MQ135 h2, .MQ135 .value-container {
+    color: #06b6d4;
+}
+
+.fan {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    animation: fan-spin 1s linear infinite;
+}
+
+.blade {
+    position: absolute;
+    width: 4px;
+    height: 20px;
+    background-color: #06b6d4;
+    left: 50%;
+    top: 50%;
+    transform-origin: 0 0;
+}
+
+.blade:nth-child(1) { transform: rotate(0deg) translateY(-50%); }
+.blade:nth-child(2) { transform: rotate(90deg) translateY(-50%); }
+.blade:nth-child(3) { transform: rotate(180deg) translateY(-50%); }
+.blade:nth-child(4) { transform: rotate(270deg) translateY(-50%); }
+
+@keyframes fan-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* History Table Styles */
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.history-table th,
+.history-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #334155;
+}
+
+.history-table th {
+    color: #94a3b8;
+    font-weight: 600;
+}
+
+.history-table tr:hover {
+    background-color: #1e293b;
+}
